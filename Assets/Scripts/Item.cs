@@ -6,153 +6,59 @@ public class Item : MonoBehaviour
 {
     // -- SYSTEM -- //
 
+    protected PlayerController playerController;
+
     void Awake()
     {
-        anim = GetComponent<Animator>();    
-        aud = GetComponent<AudioSource>();
-        ps = GetComponentInChildren<ParticleSystem>();
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        anim = GetComponent<Animator>();
     }
 
-    void Update()
+    // -- ITEM INFO -- //
+
+    [Header("ITEM INFO")]
+    public Sprite itemIcon;
+
+    // -- ACTION -- //
+
+    [Header("ACTION")]
+    public bool isReadyToFire = true;
+    public float fireDuration;
+    public float fireTimer;
+
+    public virtual void StartFire()
     {
-        
+        anim.Play("Fire");
+        // override //
     }
 
-    // -- PROJECTILES -- //
-
-    [Header("PROJECTILES")]
-    public Transform projectileSpawn;
-
-    public GameObject projectilePrefab;
-    public float projectileForce;
-
-    public GameObject altProjectilePrefab;
-    public float altProjectileForce;
-
-    public void FireAltProjectile()
+    public virtual void StopFire()
     {
-        GameObject projectile = Instantiate(altProjectilePrefab, projectileSpawn.position, projectileSpawn.rotation);
-        Rigidbody _rb = projectile.GetComponent<Rigidbody>();
-        _rb.AddForce(projectileSpawn.up * altProjectileForce, ForceMode.Impulse);
+        anim.Play("Idle");
+        // override //
     }
 
-    public void FireProjectile()
+    public void ResetFireTimer()
     {
-
+        fireTimer = fireDuration;
     }
 
     // -- INTERACTION -- //
 
     [Header("INTERACTION")]
     public Interaction interaction;
-    public bool isFiring;
-    public bool canAim;
-    public bool isWeapon;
 
-    public bool IsContinuious()
-    {
-        return interaction.continuiousInteraction;
-    }
-
-    // -- UI -- // 
-
-    [Header("UI")]
-    public Sprite icon;
 
     // -- ANIMATION -- //
 
+    [Header("ANIMATION")]
+    public bool animControlsFireDuration;
+
     Animator anim;
 
-    public void Equip()
+    public void FireAnimFinished()
     {
-        anim.SetTrigger("Equip");
-    }
-
-    public void Unequip()
-    {
-        anim.SetTrigger("Unequip");
-    }
-
-    public void PlayFireAnimation()
-    {
-        isFiring = true;
-        anim.SetTrigger("Fire");
-    }
-    
-    public void PlayAltFireAnimation()
-    {
-        isFiring = true;
-        anim.SetTrigger("AltFire");
-    }
-
-    public void StopFiring()
-    {
-        isFiring = false;
-
-        if (ps != null)
-            ps.Stop();
-    }
-
-    public void StartAiming()
-    {
-        anim.SetBool("Aiming", true);
-        anim.SetTrigger("Aim");
-    }
-
-    public void StopAiming()
-    {
-        anim.SetBool("Aiming", false);
-    }
-
-    // -- AUDIO -- //
-
-    [Header("AUDIO")]
-    public AudioClip fireAudio;
-    public AudioClip fireAltAudio;
-    public AudioClip aimAudio;
-
-    AudioSource aud;
-
-    void FireAudio()
-    {
-        if (aud != null)
-        {
-            aud.clip = fireAudio;
-            aud.pitch = Random.Range(0.9f, 1.1f);
-            aud.Play();
-        }
-    }
-    
-    void FireAltAudio()
-    {
-        if (aud != null)
-        {
-            aud.clip = fireAltAudio;
-            aud.pitch = Random.Range(0.9f, 1.1f);
-            aud.Play();
-        }
-    }
-        
-    void AimAudio()
-    {
-        aud.clip = aimAudio;
-        if (aud != null)
-        {
-            aud.pitch = Random.Range(0.9f, 1.1f);
-            aud.Play();
-        }
-    }
-
-    // -- PARTICLES -- //
-
-    ParticleSystem ps;
-
-    void FireParticles()
-    {
-        if (ps != null)
-        {
-            ps.Clear();
-            ps.Play();
-        }
+        // StopFire();
+        // playerController.ItemFireAnimFinished();
     }
 }

@@ -20,11 +20,6 @@ public class PlayerController : MonoBehaviour
         cameraTrans = GetComponentInChildren<Camera>().transform;
     }
 
-    void Start()
-    {
-
-    }
-
     void FixedUpdate()
     {
         UpdateInput();
