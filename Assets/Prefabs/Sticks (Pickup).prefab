@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 7367310365540434931}
   - component: {fileID: 7367310365540434932}
   m_Layer: 0
-  m_Name: Twigs (Pickup)
+  m_Name: Sticks (Pickup)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +433,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightObj: {fileID: 7367310364810268384}
   interactableText: twigs
-  item: {fileID: 0}
+  destroyOnInteraction: 1
+  item: {fileID: 474039891724487373, guid: cb649c887ca7d4f6c93dd9a5e922e1b9, type: 3}
 --- !u!54 &7367310365540434932
 Rigidbody:
   m_ObjectHideFlags: 0

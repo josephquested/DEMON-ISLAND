@@ -9,6 +9,8 @@ public class InteractableItem : MonoBehaviour, IInteractable
 
     public string interactableText;
 
+    public bool destroyOnInteraction;
+
     public Item item;
 
     UIController uic;
@@ -29,7 +31,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
 
     public void ReceiveInteraction(Interaction interaction)
     {
-        pc.GetItem(item);
+        pc.GetItem(item, gameObject);
     }
 
     public bool CanInteract(Interaction interaction)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 474039891724487372}
   - component: {fileID: 474039891724487373}
   m_Layer: 0
-  m_Name: Twigs (Item)
+  m_Name: Sticks (Item)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemIndex: 0
+  itemIndex: 8
+  itemQuantity: 0
+  maxQuantity: 99
   isReadyToFire: 1
   fireDuration: 0
   fireTimer: 0
