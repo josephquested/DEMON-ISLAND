@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -8,7 +9,16 @@ public class UIController : MonoBehaviour
 
     public UIInventorySlot[] inventorySlots;
 
+    public GameObject interactionParent;
+    public Text interactionText;
+
     public Sprite blankSprite;
+
+    public void EnableInteractionText(bool state, string _interactionText) 
+    {
+        interactionParent.SetActive(state);
+        interactionText.text = _interactionText;
+    }
 
     public void UpdateSelectedSlot(int slotIndex)
     {

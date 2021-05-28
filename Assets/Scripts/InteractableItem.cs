@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class InteractableItem : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public GameObject highlightObj;
+
+    public string interactableText;
+
+    UIController uic;
+
+    void Awake ()
+    {
+        uic = GameObject.FindWithTag("UIController").GetComponent<UIController>();
+    }
 
     public void SetHighlighted(bool isHighlighted)
     {
         highlightObj.SetActive(isHighlighted);
+        uic.EnableInteractionText(isHighlighted, interactableText);
     }
 
     public void ReceiveInteraction(Interaction interaction)
@@ -31,5 +30,10 @@ public class InteractableItem : MonoBehaviour, IInteractable
     public bool CanInteract(Interaction interaction)
     {
         return false;
+    }
+
+    public string GetInteractableText()
+    {
+        return interactableText;
     }
 }
