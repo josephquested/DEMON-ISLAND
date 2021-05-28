@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using MonsterLove.StateMachine;
 using System.Runtime.InteropServices;
 
@@ -165,6 +166,14 @@ public class PlayerController : MonoBehaviour
     // -- INVENTORY -- //
 
     [Header("INVENTORY")]
+    public List<Item> items = new List<Item>();    
+
+    public void GetItem (Item item) 
+    {
+        int itemIndex = item.itemIndex;
+        items[itemIndex] = item;
+        print(items);
+    }
 
     // -- ANIMATION -- //
 

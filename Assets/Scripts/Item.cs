@@ -18,6 +18,7 @@ public class Item : MonoBehaviour
 
     [Header("ITEM INFO")]
     public Sprite itemIcon;
+    public int itemIndex;
 
     // -- ACTION -- //
 
