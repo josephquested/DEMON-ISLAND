@@ -275,11 +275,13 @@ public class PlayerController : MonoBehaviour
             {
                 uic.HideCraftingMenu(true);
                 craftingMenuOpen = false;
+                uic.HideInventory();
             }
             else
             {
                 uic.HideCraftingMenu(false);
                 craftingMenuOpen = true;
+                StartCoroutine(KeepInventoryOpenRoutine());
             }
         }
     }
@@ -290,7 +292,20 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
                 TryCraftFire();
+
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                TryCraftRod();
             
+        }
+    }
+
+    IEnumerator KeepInventoryOpenRoutine()
+    {
+        while(craftingMenuOpen)
+        {
+            uic.ShowInventory();
+            yield return null;
         }
     }
 
@@ -302,7 +317,7 @@ public class PlayerController : MonoBehaviour
     {
         if (itemQuantities[0] < 1 || itemQuantities[8] < 3)
         {
-            uic.DisplayCraftingMessage("NOT ENOUGH!");
+            uic.DisplayCraftingMessage("NOT ENOUGH");
         }
 
         else
@@ -312,8 +327,26 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(fireSpawnTrans.position, -Vector3.up, out hit)) {
                 Instantiate(firePrefab, hit.point, transform.rotation);
                 itemQuantities[8] -= 3;
-                uic.DisplayCraftingMessage("MADE FIRE!");
+                uic.DisplayCraftingMessage("MADE FIRE");
             }
+        }
+    }
+
+     void TryCraftRod()
+    {
+        if (itemQuantities[9] < 1 || itemQuantities[8] < 1)
+        {
+            uic.DisplayCraftingMessage("NOT ENOUGH");
+        }
+
+        else
+        {
+                itemQuantities[9] -= 1;
+                itemQuantities[8] -= 1;
+                itemQuantities[2] += 1;
+                UpdateInventoryUI();
+                uic.DisplayCraftingMessage("MADE ROD");
+                uic.ShowInventory();
         }
     }
 }

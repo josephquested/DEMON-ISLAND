@@ -46,6 +46,13 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void HideInventory()
+    {
+        hideTimer = 0f;
+        inventoryAnimator.Play("Hide");
+        isHidden = true;
+    }
+
     public GameObject selectedItemObj;
 
     public Animator inventoryAnimator;
@@ -101,7 +108,7 @@ public class UIController : MonoBehaviour
     {
         craftingText.text = message;
         craftingText2.text = message;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         craftingText.text = "CRAFTING";
         craftingText2.text = "CRAFTING";
     }
