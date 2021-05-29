@@ -40,6 +40,8 @@ public class InputController : MonoBehaviour
     public bool interactDown;
     public bool aimDown;
     public bool aimHeld;
+    public bool inventorySelectRight;
+    public bool inventorySelectLeft;
     public Vector3 cameraEulerAngles;
     public Vector3 playerEulerAngles;
     Vector2 TargetLookAngles;
@@ -60,6 +62,8 @@ public class InputController : MonoBehaviour
         lookInput.x = player.GetAxis("Look Horizontal");
         lookInput.y = player.GetAxis("Look Vertical");
         inventoryScrollInput = player.GetAxisRaw("Inventory Scroll");
+        inventorySelectLeft = player.GetButtonDown("Inventory Select Left");
+        inventorySelectRight = player.GetButtonDown("Inventory Select Right");
     }
 
     void UpdateMouse()

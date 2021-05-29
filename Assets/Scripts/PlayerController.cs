@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        InitSlotUI();
         UpdateInventoryUI();
     }
 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        UpdateEquippedSlot();
         UpdateInteract();
     }
 
@@ -186,12 +188,57 @@ public class PlayerController : MonoBehaviour
         ClearInteractable();
         UpdateInventoryUI();
         uic.ShowInventory();
+        ChangeEquippedItem(equippedIndex);
     }
 
     void UpdateInventoryUI()
     {
         uic.UpdateInventorySlots(itemQuantities);
     }
+
+    public int equippedIndex = 0;
+
+    public void UpdateEquippedSlot()
+    {   
+        if (ic.inventorySelectLeft || ic.inventorySelectRight)
+            uic.ShowInventory();
+
+
+        int _equippedIndex = equippedIndex;
+
+        if (ic.inventorySelectLeft)
+            _equippedIndex--;
+        else if (ic.inventorySelectRight)
+            _equippedIndex++;
+        
+        if (_equippedIndex < 0)
+            _equippedIndex = 9;
+        else if (_equippedIndex > 9)
+            _equippedIndex = 0;
+        
+        if (_equippedIndex != equippedIndex)
+        {
+            ChangeEquippedItem(_equippedIndex);
+        }
+    }
+
+    void InitSlotUI()
+    {
+        uic.SetSlotSelected(0);
+    }
+
+    void ChangeEquippedItem (int _equippedIndex)
+    {
+        itemObjs[equippedIndex].SetActive(false);
+        equippedIndex = _equippedIndex;
+        uic.SetSlotSelected(equippedIndex);
+
+        if (itemQuantities[equippedIndex] > 0)
+            itemObjs[equippedIndex].SetActive(true);
+
+    }
+
+    public GameObject[] itemObjs;
 
     // this thing above should actually be a classs, "inventoryitem" and you should be able to add an item to it. so like, the inventory is an array of inventroyitems, and you can increase or decrease their amount // 
 
