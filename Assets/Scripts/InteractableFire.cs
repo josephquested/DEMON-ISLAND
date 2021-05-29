@@ -13,6 +13,25 @@ public class InteractableFire : MonoBehaviour, IInteractable
 
     PlayerController pc;
 
+    public float fireTimer = 60f;   
+
+
+    void FixedUpdate()
+    {
+        fireTimer -= Time.fixedDeltaTime;
+
+        if (fireTimer < 0)
+            FireDie();
+    }
+
+    public GameObject fireDeathObj;
+
+    void FireDie()
+    {
+        Instantiate(fireDeathObj, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
     void Awake ()
     {
         uic = GameObject.FindWithTag("UIController").GetComponent<UIController>();
@@ -39,4 +58,6 @@ public class InteractableFire : MonoBehaviour, IInteractable
     {
         return interactableText;
     }
+
+
 }

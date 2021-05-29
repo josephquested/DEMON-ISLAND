@@ -89,6 +89,23 @@ public class UIController : MonoBehaviour
     
     public Animator craftingAnim;
 
+    public Text craftingText;
+    public Text craftingText2;
+
+    public void DisplayCraftingMessage(string message)
+    {
+        StartCoroutine(MessageRoutine(message));
+    }
+
+    IEnumerator MessageRoutine(string message)
+    {
+        craftingText.text = message;
+        craftingText2.text = message;
+        yield return new WaitForSeconds(3);
+        craftingText.text = "CRAFTING";
+        craftingText2.text = "CRAFTING";
+    }
+
     public void HideCraftingMenu(bool state)
     {
         if (state == true)

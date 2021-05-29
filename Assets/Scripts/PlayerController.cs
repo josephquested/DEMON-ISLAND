@@ -294,15 +294,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public Transform fireSpawnTrans;
+
+    public GameObject firePrefab;
+
     void TryCraftFire()
     {
         if (itemQuantities[0] < 1 || itemQuantities[8] < 3)
         {
-            print("not enough materials to craft!");
+            uic.DisplayCraftingMessage("NOT ENOUGH!");
         }
+
         else
         {
-            print("can craft fire!");
+            RaycastHit hit;
+
+            if (Physics.Raycast(fireSpawnTrans.position, -Vector3.up, out hit)) {
+                Instantiate(firePrefab, hit.point, transform.rotation);
+                itemQuantities[8] -= 3;
+                uic.DisplayCraftingMessage("MADE FIRE!");
+            }
         }
     }
 }
