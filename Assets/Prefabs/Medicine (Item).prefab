@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemIndex: 4
+  itemIndex: 3
   itemQuantity: 0
   maxQuantity: 99
   isReadyToFire: 1

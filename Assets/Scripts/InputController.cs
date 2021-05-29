@@ -50,6 +50,8 @@ public class InputController : MonoBehaviour
     Transform playerTrans;
     Transform cameraTrans;
 
+    public bool toggleCrafting;
+
     void UpdateInput() 
     {
         runHeld = player.GetButton("Run");
@@ -64,6 +66,7 @@ public class InputController : MonoBehaviour
         inventoryScrollInput = player.GetAxisRaw("Inventory Scroll");
         inventorySelectLeft = player.GetButtonDown("Inventory Select Left");
         inventorySelectRight = player.GetButtonDown("Inventory Select Right");
+        toggleCrafting = player.GetButtonDown("Toggle Crafting");
     }
 
     void UpdateMouse()

@@ -84,4 +84,22 @@ public class UIController : MonoBehaviour
                 i++;
         }
     }
+
+    // -- crafting -- //
+    
+    public Animator craftingAnim;
+
+    public void HideCraftingMenu(bool state)
+    {
+        if (state == true)
+        {
+            craftingAnim.Play("Hide");
+        }
+
+        else
+        {
+            craftingAnim.Play("Show");
+        }
+    }
+
 }

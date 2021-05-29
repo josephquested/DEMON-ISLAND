@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     {
         UpdateEquippedSlot();
         UpdateInteract();
+        UpdateToggleCrafting();
+        UpdateCrafting();
     }
 
     // -- INPUT -- //
@@ -259,5 +261,48 @@ public class PlayerController : MonoBehaviour
     public void PlayFootstepAudio()
     {
         footstepAudio.PlayFootstep(isRunning);
+    }
+
+    // -- CRAFTING -- //
+
+    bool craftingMenuOpen = false;
+
+    void UpdateToggleCrafting ()
+    {
+        if (ic.toggleCrafting)
+        {
+            if (craftingMenuOpen)
+            {
+                uic.HideCraftingMenu(true);
+                craftingMenuOpen = false;
+            }
+            else
+            {
+                uic.HideCraftingMenu(false);
+                craftingMenuOpen = true;
+            }
+        }
+    }
+
+    void UpdateCrafting()
+    {
+        if (craftingMenuOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                TryCraftFire();
+            
+        }
+    }
+
+    void TryCraftFire()
+    {
+        if (itemQuantities[0] < 1 || itemQuantities[8] < 3)
+        {
+            print("not enough materials to craft!");
+        }
+        else
+        {
+            print("can craft fire!");
+        }
     }
 }
