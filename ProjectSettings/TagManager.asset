@@ -8,6 +8,7 @@ TagManager:
   - PlayerTarget
   - UIController
   - TextBox
+  - Water
   layers:
   - Default
   - TransparentFX

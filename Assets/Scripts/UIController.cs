@@ -46,6 +46,15 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void HideInventory()
+    {
+        hideTimer = 0f;
+        inventoryAnimator.Play("Hide");
+        isHidden = true;
+    }
+
+    public GameObject selectedItemObj;
+
     public Animator inventoryAnimator;
 
     public void EnableInteractionText(bool state, string _interactionText) 
@@ -54,16 +63,10 @@ public class UIController : MonoBehaviour
         interactionText.text = _interactionText;
     }
 
-    public void UpdateSelectedSlot(int slotIndex)
+    public void SetSlotSelected(int slotIndex)
     {
-        int i = 0;
-
-        foreach(UIInventorySlot slot in inventorySlots)
-        {
-            bool isSelected = i == slotIndex;
-            slot.SetSelected(isSelected);            
-            i++;
-        }
+        selectedItemObj.transform.SetParent(inventorySlots[slotIndex].gameObject.transform);
+        selectedItemObj.transform.position = inventorySlots[slotIndex].gameObject.transform.position;
     }
 
     public void UpdateInventorySlots(List<int> itemQuantities)
@@ -88,4 +91,39 @@ public class UIController : MonoBehaviour
                 i++;
         }
     }
+
+    // -- crafting -- //
+    
+    public Animator craftingAnim;
+
+    public Text craftingText;
+    public Text craftingText2;
+
+    public void DisplayCraftingMessage(string message)
+    {
+        StartCoroutine(MessageRoutine(message));
+    }
+
+    IEnumerator MessageRoutine(string message)
+    {
+        craftingText.text = message;
+        craftingText2.text = message;
+        yield return new WaitForSeconds(2);
+        craftingText.text = "CRAFTING";
+        craftingText2.text = "CRAFTING";
+    }
+
+    public void HideCraftingMenu(bool state)
+    {
+        if (state == true)
+        {
+            craftingAnim.Play("Hide");
+        }
+
+        else
+        {
+            craftingAnim.Play("Show");
+        }
+    }
+
 }
