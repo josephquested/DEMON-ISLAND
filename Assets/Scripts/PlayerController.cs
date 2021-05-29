@@ -44,6 +44,21 @@ public class PlayerController : MonoBehaviour
         UpdateInteract();
         UpdateToggleCrafting();
         UpdateCrafting();
+
+         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            itemQuantities[0] = 99;
+            itemQuantities[1] = 99;
+            itemQuantities[2] = 99;
+            itemQuantities[3] = 99;
+            itemQuantities[4] = 99;
+            itemQuantities[5] = 99;
+            itemQuantities[6] = 99;
+            itemQuantities[7] = 99;
+            itemQuantities[8] = 99;
+            itemQuantities[9] = 99;
+            UpdateInventoryUI();
+        }
     }
 
     // -- INPUT -- //
@@ -347,6 +362,20 @@ public class PlayerController : MonoBehaviour
                 UpdateInventoryUI();
                 uic.DisplayCraftingMessage("MADE ROD");
                 uic.ShowInventory();
+        }
+    }
+
+    // INTERACTIONS // 
+
+    void UpdateInteractions()
+    {
+        // rod //
+        if (equippedIndex == 2)
+        {
+            if (ic.fireDown)
+            {
+                print("can fish!");
+            }
         }
     }
 }
