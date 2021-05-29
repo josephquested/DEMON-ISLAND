@@ -40,10 +40,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        UpdateNumberEquip();
         UpdateEquippedSlot();
         UpdateInteract();
         UpdateToggleCrafting();
         UpdateCrafting();
+        UpdateInteractions();
+
 
          if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
             itemQuantities[8] = 99;
             itemQuantities[9] = 99;
             UpdateInventoryUI();
+            uic.ShowInventory();
         }
     }
 
@@ -122,6 +126,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     [Header("MOVEMENT")]
+
     public float movementSpeed;
     public float runSpeed;
 
@@ -196,6 +201,63 @@ public class PlayerController : MonoBehaviour
     public List<Item> items = new List<Item>(); 
 
     public List<int> itemQuantities = new List<int>();   
+
+    void UpdateNumberEquip()
+    {
+        if (!craftingMenuOpen)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ChangeEquippedItem(0);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ChangeEquippedItem(1);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ChangeEquippedItem(2);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                ChangeEquippedItem(3);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+               {
+                ChangeEquippedItem(4);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                ChangeEquippedItem(5);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                ChangeEquippedItem(6);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                ChangeEquippedItem(7);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                ChangeEquippedItem(8);
+                uic.ShowInventory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                ChangeEquippedItem(9);
+                uic.ShowInventory();
+            }
+        }
+    }
 
     public void GetItem (Item item, GameObject interactableObj) 
     {
