@@ -18,6 +18,22 @@ public class Item : MonoBehaviour
 
     [Header("ITEM INFO")]
     public Sprite itemIcon;
+    public int itemIndex;
+
+    // -- GETTING / DROPPING -- //
+
+    public int itemQuantity;
+    public int maxQuantity;
+
+    public void IncreaseQuantity()
+    {
+        itemQuantity++;
+    }
+
+    public void DecreaseQuantity()
+    {
+        itemQuantity--;
+    }
 
     // -- ACTION -- //
 

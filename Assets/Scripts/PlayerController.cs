@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using MonsterLove.StateMachine;
 using System.Runtime.InteropServices;
 
@@ -8,6 +9,8 @@ public enum PlayerState { Idle, Moving };
 public class PlayerController : MonoBehaviour
 {
 
+    UIController uic;
+
     // -- SYSTEM -- //
 
     void Awake()
@@ -15,9 +18,15 @@ public class PlayerController : MonoBehaviour
         ic = GameObject.FindWithTag("InputController").GetComponent<InputController>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        uic = GameObject.FindWithTag("UIController").GetComponent<UIController>();
         fsm = StateMachine<PlayerState>.Initialize(this, PlayerState.Idle);
         footstepAudio = GetComponentInChildren<FootstepAudio>();
         cameraTrans = GetComponentInChildren<Camera>().transform;
+    }
+
+    void Start()
+    {
+        UpdateInventoryUI();
     }
 
     void FixedUpdate()
@@ -165,6 +174,26 @@ public class PlayerController : MonoBehaviour
     // -- INVENTORY -- //
 
     [Header("INVENTORY")]
+    public List<Item> items = new List<Item>(); 
+
+    public List<int> itemQuantities = new List<int>();   
+
+    public void GetItem (Item item, GameObject interactableObj) 
+    {
+        int itemIndex = item.itemIndex;
+        itemQuantities[itemIndex]++;
+        Destroy(interactableObj);
+        ClearInteractable();
+        UpdateInventoryUI();
+        uic.ShowInventory();
+    }
+
+    void UpdateInventoryUI()
+    {
+        uic.UpdateInventorySlots(itemQuantities);
+    }
+
+    // this thing above should actually be a classs, "inventoryitem" and you should be able to add an item to it. so like, the inventory is an array of inventroyitems, and you can increase or decrease their amount // 
 
     // -- ANIMATION -- //
 

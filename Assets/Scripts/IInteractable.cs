@@ -8,4 +8,6 @@ public interface IInteractable
     void ReceiveInteraction(Interaction interaction);
 
     bool CanInteract(Interaction interaction);
+
+    string GetInteractableText();
 }
